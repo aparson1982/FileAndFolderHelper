@@ -9,17 +9,18 @@ namespace FileAndFolderHelper
 {
     public class CSV
     {
-        public static int GetLengthFromCSV(string Path, string delimiter)
+        public static int GetLengthFromTextOrCSV(string Path, string delimiter)
         {
             char delimit = delimiter[0];
-            List<string> values = File.ReadAllLines(Path).Select(v => ReadFromCSV(v, delimit).ToString()).ToList();
-            return values.Count;
+            List<string> lines = new List<string>(File.ReadAllLines(Path));
+            List<string> col = new List<string>();
+            foreach (var line in lines)
+            {
+                col = new List<string>(line.Split(delimit));
+            }
+            return col.Count;
         }
 
-        internal static string[] ReadFromCSV(string CsvLine, char delimiter)
-        {
-            string[] values = CsvLine.Split(delimiter);
-            return values;
-        }
+        
     }
 }
