@@ -14,8 +14,8 @@ namespace FileAndFolderHelper
             char delimit = delimiter[0];
             List<string> values = File.ReadAllLines(Path).Select(v => ReadFromCSV(v, delimit).ToString()).ToList();
             return values.Count;
-            
         }
+
         internal static string[] ReadFromCSV(string CsvLine, char delimiter)
         {
             string[] values = CsvLine.Split(delimiter);
