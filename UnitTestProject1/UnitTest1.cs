@@ -17,8 +17,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestFileName()
         {
-            //Console.WriteLine(FileNameHelper.GenerateUniqueNumericFileName(@"C:\Users\rparso2\Downloads\New folder","001.txt",3));
-            Console.WriteLine(FileNameHelper.GenerateUniqueNumericFileName(@"C:\Users\rparso2\Downloads\New folder", "1.txt", 8));
+            //Console.WriteLine(FileNameHelper.GenerateUniqueNumericFileName(@"C:\Users\rparso2\Downloads\New folder","Adam001.txt",3));
+            Console.WriteLine(FileNameHelper.GenerateUniqueNumericFileName(@"C:\Users\rparso2\Downloads\New folder", "0000001.txt", 1, true));
         }
     }
 }
