@@ -27,14 +27,14 @@ namespace FileAndFolderHelper
 
                 if (areIdentical)
                 {
-                    return str = "The two folders are identical.";
+                    return str = "Identical.  The two folders are identical.";
                 }
 
                 bool filenamesSame = listA.SequenceEqual(listB, filenameCompare);
 
                 if (filenamesSame)
                 {
-                    return str = "The two folders aren't identical but contain the same filenames.";
+                    return str = "Equal.  The two folders aren't identical but contain the same filenames.";
                 }
 
                 string filenamesA = String.Join(",", Directory.GetFiles(folderpathA, "*." + extensionA).Select(filename => Path.GetFileNameWithoutExtension(filename)));
@@ -47,8 +47,13 @@ namespace FileAndFolderHelper
 
                 if (filenamesWithoutExtensionSame)
                 {
-                    return str = "The two folders contain filenames but not extensions that are the same";
+                    return str = "Equal.  The folder contains filenames (without extensions) that are the same.";
                 }
+
+                List<string> missingList = listOfFilenamesA.Except(listOfFilenamesB).ToList();
+
+                str = "Not Equal.  The following files are missing:  " + Environment.NewLine +
+                      string.Join(", ", missingList);
 
             }
             catch (Exception e)
