@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileAndFolderHelper
 {
-    class FilenameCompare : System.Collections.Generic.IEqualityComparer<System.IO.FileInfo>
+    internal class FilenameCompare : System.Collections.Generic.IEqualityComparer<System.IO.FileInfo>
     {
         public FilenameCompare()
         {
