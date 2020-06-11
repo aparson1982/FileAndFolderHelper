@@ -27,5 +27,18 @@ namespace UnitTestProject1
         {
             Console.WriteLine(FolderHelper.FolderEquality(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Automation Anywhere Files\Automation Anywhere\Shaw Files\0067_RDCCarpetReplenishment\EDI Files\0001996", @"\\nas72v2\vdi_data\USA\rparso2\Documents\Automation Anywhere Files\Automation Anywhere\Shaw Files\0067_RDCCarpetReplenishment\EDI Files\0001996\Outbox", "850","855",false));
         }
+
+        [TestMethod]
+        public void TestTextToString()
+        {
+            Console.WriteLine(TextFileOperations.ConvertTextFileToString(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Automation Anywhere Files\Test2.855"));
+        }
+
+        [TestMethod]
+        public void TestDeleteOldFiles()
+        {
+            //Console.WriteLine(FolderHelper.DeleteFilesOlderThanXDays(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test",30,"*",".xlsx"));
+            Console.WriteLine(FolderHelper.DeleteFilesOlderThanXDays(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test", 30));
+        }
     }
 }

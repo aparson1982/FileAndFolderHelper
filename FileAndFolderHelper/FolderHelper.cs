@@ -77,5 +77,65 @@ namespace FileAndFolderHelper
 
             return str;
         }
+
+        /// <summary>
+        /// Deletes files older than x number of days.  Please ensure that the the filename and extension are written
+        /// in this manner.  
+        /// Example:  filename = somefilename  or  * 
+        ///           ext      = .doc
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="days"></param>
+        /// <param name="filename"></param>
+        /// <param name="ext"></param>
+        /// <returns></returns>
+        public static string DeleteFilesOlderThanXDays(string path, int days, string filename = null, string ext = null)
+        {
+            string str = string.Empty;
+            try
+            {
+                int fileCount = 0;
+                string fileDeleted = null;
+                string directory;
+
+                FileInfo[] files = new FileInfo[] { };
+                DirectoryInfo di = new DirectoryInfo(path);
+
+                if (!string.IsNullOrEmpty(filename) && !string.IsNullOrEmpty(ext))
+                {
+                    files = di.GetFiles(filename + ext).Where(p => p.Extension == ext).ToArray();
+                }
+                else
+                {
+                    files = di.GetFiles();
+                }
+
+                directory = di.FullName;
+
+                foreach (FileInfo file in files)
+                {
+
+                    if (file.LastAccessTime < DateTime.Now.AddDays(-days) || file.LastWriteTime < DateTime.Now.AddDays(-days))
+                    {
+                        fileDeleted += file.Name + Environment.NewLine;
+                        file.Delete();
+                        fileCount++;
+                    }
+                    
+                }
+
+                str = fileCount.ToString() + " files were deleted from directory " + directory + ".  " + Environment.NewLine
+                    + "The following files were deleted:  " + fileDeleted;
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  path = " + path + " days " + days + " filename = " + filename + " ext = " + ext + Environment.NewLine;
+            }
+            return str;
+        }
     }
 }
