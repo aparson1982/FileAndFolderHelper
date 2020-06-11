@@ -78,6 +78,7 @@ namespace FileAndFolderHelper
             return str;
         }
 
+
         /// <summary>
         /// Deletes files older than x number of days.  Please ensure that the the filename and extension are written
         /// in this manner.  
