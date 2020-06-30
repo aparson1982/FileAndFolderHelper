@@ -40,5 +40,17 @@ namespace UnitTestProject1
             //Console.WriteLine(FolderHelper.DeleteFilesOlderThanXDays(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test",30,"*",".xlsx"));
             Console.WriteLine(FolderHelper.DeleteFilesOlderThanXDays(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test", 30));
         }
+
+        [TestMethod]
+        public void TestFileExists()
+        {
+            Console.WriteLine(FolderHelper.FileExists(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Automation Anywhere Files\Automation Anywhere\Shaw Files\0067_RDCCarpetReplenishment\EDI Files\0001996\Outbox", "*.850"));
+        }
+
+        [TestMethod]
+        public void DeleteDuplicates()
+        {
+            Console.WriteLine(FolderHelper.DeleteDuplicate(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test", @"\\nas72v2\vdi_data\USA\rparso2\Documents\Test\Archive", "*.855"));
+        }
     }
 }

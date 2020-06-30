@@ -138,5 +138,95 @@ namespace FileAndFolderHelper
             }
             return str;
         }
+
+
+        /// <summary>
+        /// Checks if a directory contains a file or files of a certain extension.
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static string FileExists(string dirPath, string filename)
+        {
+            string str = string.Empty;
+            try
+            {
+                if (Directory.GetFiles(dirPath, filename).Length == 0)
+                {
+                    str = "False";
+                }
+                else
+                {
+                    str = "True";
+                }
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  path = " + dirPath + " filename = " + filename + Environment.NewLine;
+            }
+            return str;
+        }
+
+
+        /// <summary>
+        /// Will delete duplicate file(s) in folderpathB.  Use *.extension to delete multiple duplicates.
+        /// </summary>
+        /// <param name="folderpathA"></param>
+        /// <param name="folderpathB"></param>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static string DeleteDuplicate(string folderpathA, string folderpathB, string filename)
+        {
+            string str = string.Empty;
+            try
+            {
+                var dirA = new DirectoryInfo(folderpathA);
+                var dirB = new DirectoryInfo(folderpathB);
+                int count = 0;
+                string filenames = string.Empty;
+
+                IEnumerable<System.IO.FileInfo> listA = dirA.GetFiles(filename, System.IO.SearchOption.TopDirectoryOnly);
+                IEnumerable<System.IO.FileInfo> listB = dirB.GetFiles(filename, System.IO.SearchOption.TopDirectoryOnly);
+
+                foreach (FileInfo item in listA)
+                {
+                    foreach (FileInfo file in listB)
+                    {
+                        if (item.Name == file.Name)
+                        {
+                            
+                            filenames += file.Name + ", ";
+                            file.Delete();
+                            count++;
+                        }
+                    }
+                }
+
+                if (count > 0)
+                {
+                    str = count.ToString() + " files were deleted from " + folderpathB + ".  " + Environment.NewLine
+                        + "The following files were deleted:  " + Environment.NewLine + filenames;
+                }
+                else
+                {
+                    str = count.ToString() + " files were deleted from " + folderpathB;
+                }
+
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  folderpathA = " + folderpathA + " | folderpathB = " + folderpathB + Environment.NewLine;
+            }
+
+            return str;
+        }
     }
 }
