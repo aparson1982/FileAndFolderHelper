@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,31 @@ namespace FileAndFolderHelper
                 col = new List<string>(line.Split(delimit));
             }
             return col.Count;
+        }
+
+        public static string ConvertCsvToXlsx(string FileName)
+        {
+            string str;
+            try
+            {
+                Application app = new Application();
+                Workbook wb = app.Workbooks.Open(FileName, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                string filePath = Path.GetDirectoryName(FileName);
+                string fileName = Path.GetFileNameWithoutExtension(FileName);
+                wb.SaveAs(filePath + @"\" + fileName + ".xlsx", XlFileFormat.xlOpenXMLWorkbook, Type.Missing, Type.Missing, Type.Missing, Type.Missing, XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+                wb.Close();
+                app.Quit();
+                str = @filePath + @"\" + fileName + ".xlsx" + " created successfully.";
+            }
+            catch (Exception e)
+            {
+                str = "Message:  " + e.Message + Environment.NewLine +
+                    "Source:  " + e.Source + Environment.NewLine +
+                    "StackTrace:  " + e.StackTrace + Environment.NewLine +
+                    "Inner Exception:  " + e.InnerException + Environment.NewLine +
+                    "Parameters:  FileName = " + FileName + Environment.NewLine;
+            }
+            return str;
         }
 
         

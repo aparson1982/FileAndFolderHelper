@@ -52,5 +52,11 @@ namespace UnitTestProject1
         {
             Console.WriteLine(FolderHelper.DeleteDuplicate(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test", @"\\nas72v2\vdi_data\USA\rparso2\Documents\Test\Archive", "*.855"));
         }
+
+        [TestMethod]
+        public void TestConvertToXlsx()
+        {
+            Console.WriteLine(CSV.ConvertCsvToXlsx(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test\test.csv"));
+        }
     }
 }
