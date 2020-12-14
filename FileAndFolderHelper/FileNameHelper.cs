@@ -9,7 +9,7 @@ using System.Collections;
 
 namespace FileAndFolderHelper
 {
-    public class FileNameHelper
+    public class FileNameHelper : FileAndFolderHelperProperties
     {
         public static string GenerateUniqueNumericFileName(string folderpath, string filename = null, int padLength = 0, bool appendName = false)
         {
@@ -40,10 +40,7 @@ namespace FileAndFolderHelper
                     {
                         
                         string validnameRemovedNumber = regexNumeric.Replace(validname, string.Empty);
-                        //string splitFileName = splitFileNameArray[0];
-                        //splitFileName = regexExtensionPattern.Replace(splitFileName,string.Empty);
-                        //splitFileName = regexFilePathPattern.Match(splitFileName).Value;
-                   
+                
 
                         IOrderedEnumerable<string> sortedList = Directory.GetFiles(folderpath).OrderBy(f => f);
                         
@@ -155,10 +152,11 @@ namespace FileAndFolderHelper
 
                validname = Path.Combine(validname.Trim() + extension);
 
-                
+                ReturnStatusCode = 0; 
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 validname = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +

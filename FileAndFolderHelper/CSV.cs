@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FileAndFolderHelper
 {
-    public class CSV
+    public class CSV : FileAndFolderHelperProperties
     {
         public static int GetLengthFromTextOrCSV(string Path, string delimiter)
         {
@@ -35,9 +35,11 @@ namespace FileAndFolderHelper
                 wb.Close();
                 app.Quit();
                 str = @filePath + @"\" + fileName + ".xlsx" + " created successfully.";
+                ReturnStatusCode = 0;
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +

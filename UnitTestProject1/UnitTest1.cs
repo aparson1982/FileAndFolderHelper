@@ -31,7 +31,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestTextToString()
         {
-            Console.WriteLine(TextFileOperations.ConvertTextFileToString(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Automation Anywhere Files\Test2.855"));
+            Console.WriteLine(TextFileOperations.ConvertTextFileToString(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Downloads\DevOrderMgmtSysUrlConfig.json"));
         }
 
         [TestMethod]
@@ -57,6 +57,12 @@ namespace UnitTestProject1
         public void TestConvertToXlsx()
         {
             Console.WriteLine(CSV.ConvertCsvToXlsx(@"\\nas72v2\vdi_data\USA\rparso2\Documents\Test\test.csv"));
+        }
+
+        [TestMethod]
+        public void TestCreateDir()
+        {
+            Console.WriteLine(FolderHelper.CreateDir(@"\\nas72v2\rpa\Dev\0076_AccountTerritoryChanges\Logs\DetailedLogs\"));
         }
     }
 }

@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CSV.cs" />
+    <Compile Include="ErrorProperties.cs" />
+    <Compile Include="FileAndFolderHelperProperties.cs" />
     <Compile Include="FileCompare.cs" />
     <Compile Include="FilenameCompare.cs" />
     <Compile Include="FileNameHelper.cs" />

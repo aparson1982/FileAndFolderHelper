@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileAndFolderHelper
 {
-    public class FolderHelper
+    public class FolderHelper : FileAndFolderHelperProperties
     {
         public static string FolderEquality(string folderpathA, string folderpathB, string extensionA = null, string extensionB = null, bool CompareWithExtension = true)
         {
@@ -62,12 +62,15 @@ namespace FileAndFolderHelper
 
                     str = "Not Equal.  The following files are missing:  " + Environment.NewLine +
                           string.Join(", ", missingList);
+
+                    ReturnStatusCode = 0;
                 }
                 
 
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -127,9 +130,12 @@ namespace FileAndFolderHelper
 
                 str = fileCount.ToString() + " files were deleted from directory " + directory + ".  " + Environment.NewLine
                     + "The following files were deleted:  " + fileDeleted;
+
+                ReturnStatusCode = 0;
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -159,9 +165,12 @@ namespace FileAndFolderHelper
                 {
                     str = "True";
                 }
+
+                ReturnStatusCode = 0;
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -215,10 +224,11 @@ namespace FileAndFolderHelper
                 {
                     str = count.ToString() + " files were deleted from " + folderpathB;
                 }
-
+                ReturnStatusCode = 0;
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
@@ -227,6 +237,30 @@ namespace FileAndFolderHelper
             }
 
             return str;
+        }
+
+
+        public static string CreateDir(string path)
+        {
+            string str = string.Empty;
+            try
+            {
+                path = path.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                str = $"{path} created successfully.";
+                ReturnStatusCode = 0;
+            }
+            catch (Exception e)
+            {
+                ReturnStatusCode = -1;
+                str = $"{ErrorIntro} Message:  {e.Message}{Environment.NewLine} " +
+                    $"Source:  {e.Source}{Environment.NewLine} " +
+                    $"StackTrace:  {e.StackTrace}{Environment.NewLine}";
+                
+            }
+            ReturnStatusDescription = str;
+            return str;
+
         }
     }
 }

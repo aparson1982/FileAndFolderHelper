@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FileAndFolderHelper
 {
-    public class TextFileOperations
+    public class TextFileOperations : FileAndFolderHelperProperties
     {
         /// <summary>
         /// Converts a .txt file to a string.
@@ -20,9 +20,11 @@ namespace FileAndFolderHelper
             try
             {
                 str = File.ReadAllText(path);
+                ReturnStatusCode = 0;
             }
             catch (Exception e)
             {
+                ReturnStatusCode = -1;
                 str = "Message:  " + e.Message + Environment.NewLine +
                     "Source:  " + e.Source + Environment.NewLine +
                     "StackTrace:  " + e.StackTrace + Environment.NewLine +
