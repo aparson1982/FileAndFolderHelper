@@ -64,5 +64,11 @@ namespace UnitTestProject1
         {
             Console.WriteLine(FolderHelper.CreateDir(@"\\nas72v2\rpa\Dev\0076_AccountTerritoryChanges\Logs\DetailedLogs\"));
         }
+
+        [TestMethod]
+        public void TestClearFolder()
+        {
+            Console.WriteLine(FolderHelper.ClearFolder(@"C:\Users\rparso2\Downloads\GoogleDriveTest\Test Clear"));
+        }
     }
 }

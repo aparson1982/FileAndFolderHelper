@@ -146,6 +146,39 @@ namespace FileAndFolderHelper
         }
 
 
+        public static string ClearFolder(string Path)
+        {
+            string str = string.Empty;
+            try
+            {
+
+                DirectoryInfo dirInfo = new DirectoryInfo(Path);
+                foreach (FileInfo file in dirInfo.EnumerateFiles())
+                {
+                    
+                    file.Delete();
+                    str += $"Deleted {file.FullName}{Environment.NewLine}";
+                }
+                foreach (DirectoryInfo dir in dirInfo.EnumerateDirectories())
+                {
+                    dir.Delete(true);
+                    str += $"Deleted {dir.FullName}{Environment.NewLine}";
+                }
+                ReturnStatusCode = 0;
+            }
+            catch (Exception e)
+            {
+                ReturnStatusCode = -1;
+                str = $"Message:  {e.Message}{Environment.NewLine}" +
+                    $"Source:  {e.Source}{Environment.NewLine}" +
+                    $"StackTrace:  {e.StackTrace}{Environment.NewLine}" +
+                    $"Variables::{Environment.NewLine}" +
+                    $"Path: {Path}{Environment.NewLine}";
+            }
+            return str;
+        }
+
+
         /// <summary>
         /// Checks if a directory contains a file or files of a certain extension.
         /// </summary>
