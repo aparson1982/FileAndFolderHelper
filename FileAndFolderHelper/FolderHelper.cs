@@ -279,7 +279,7 @@ namespace FileAndFolderHelper
             try
             {
                 path = path.TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
-                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                Directory.CreateDirectory(Path.GetDirectoryName(path) ?? throw new InvalidOperationException());
                 str = $"{path} created successfully.";
                 ReturnStatusCode = 0;
             }

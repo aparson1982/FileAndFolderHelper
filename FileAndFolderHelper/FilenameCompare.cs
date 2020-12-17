@@ -15,7 +15,7 @@ namespace FileAndFolderHelper
 
         public bool Equals(FileInfo x, FileInfo y)
         {
-            return (x.Name == y.Name);
+            return (x?.Name == y?.Name);
         }
 
         public int GetHashCode(FileInfo obj)

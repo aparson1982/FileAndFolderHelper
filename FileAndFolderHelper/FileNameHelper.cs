@@ -20,7 +20,7 @@ namespace FileAndFolderHelper
             {
                 
                 int numericSequence = 1;
-                if (!string.IsNullOrEmpty(filename.Trim()))
+                if (!string.IsNullOrEmpty(filename?.Trim()))
                 {
                     validname = Path.GetFileNameWithoutExtension(filename.Trim());
                     extension = Path.GetExtension(filename);
@@ -150,7 +150,7 @@ namespace FileAndFolderHelper
 
                 
 
-               validname = Path.Combine(validname.Trim() + extension);
+                validname = Path.Combine(validname.Trim() + extension);
 
                 ReturnStatusCode = 0; 
             }
